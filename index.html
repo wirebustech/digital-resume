@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oputa Uche Uzoukwu - Cloud & Systems Expert</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --light: #f8f9fa;
+            --dark: #212529;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            padding: 3rem 0;
+            background: var(--primary);
+            color: white;
+            margin-bottom: 2rem;
+            border-radius: 10px;
+        }
+
+        .contact-bar {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .contact-item a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .section {
+            background: white;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            color: var(--secondary);
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-card {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .proficiency-dots {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .dot {
+            width: 15px;
+            height: 15px;
+            background: var(--secondary);
+            border-radius: 50%;
+            opacity: 0.3;
+        }
+
+        .dot.active {
+            opacity: 1;
+        }
+
+        .project-card {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            border-left: 4px solid var(--secondary);
+            background: var(--light);
+        }
+
+        .certifications-grid {
+            columns: 2;
+            gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .certifications-grid {
+                columns: 1;
+            }
+            
+            .contact-bar {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header" id="header">
+            <!-- Dynamic content -->
+        </header>
+
+        <section class="section" id="skills">
+            <!-- Dynamic content -->
+        </section>
+
+        <section class="section" id="projects">
+            <!-- Dynamic content -->
+        </section>
+
+        <section class="section" id="education">
+            <!-- Dynamic content -->
+        </section>
+
+        <section class="section" id="certifications">
+            <!-- Dynamic content -->
+        </section>
+    </div>
+
+    <script>
+        async function loadResume() {
+            try {
+                const response = await fetch('http://localhost:3001/api/resume');
+                const data = await response.json();
+                renderResume(data);
+            } catch (error) {
+                console.error('Error loading resume:', error);
+                document.getElementById('header').innerHTML = `
+                    <h1>OPUTA UCHE UZOUKWU</h1>
+                    <div class="error" style="color: #ff6b6b; margin-top: 2rem;">
+                        Failed to load resume data. Please try again later.
+                    </div>
+                `;
+            }
+        }
+
+        function renderResume(data) {
+            // Render Header
+            document.getElementById('header').innerHTML = `
+                <h1>${data.personalInfo.name}</h1>
+                <div class="contact-bar">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:${data.personalInfo.email}">${data.personalInfo.email}</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>${data.personalInfo.phone}</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-globe"></i>
+                        <a href="${data.personalInfo.webpage}" target="_blank">Webpage</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-linkedin"></i>
+                        <a href="${data.personalInfo.linkedin}" target="_blank">LinkedIn</a>
+                    </div>
+                </div>
+            `;
+
+            // Render Skills
+            document.getElementById('skills').innerHTML = `
+                <h2 class="section-title">Technical Proficiencies</h2>
+                <div class="skills-grid">
+                    ${data.skills.map(skill => `
+                        <div class="skill-card">
+                            <h3>${skill.category}</h3>
+                            <ul>
+                                ${skill.items.map(item => `<li>${item}</li>`).join('')}
+                            </ul>
+                            <div class="proficiency-dots">
+                                ${Array(5).fill().map((_, i) => `
+                                    <div class="dot ${i < skill.proficiency ? 'active' : ''}"></div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+
+            // Render Projects
+            document.getElementById('projects').innerHTML = `
+                <h2 class="section-title">Key Projects</h2>
+                ${data.projects.map(project => `
+                    <div class="project-card">
+                        <h3>${project.project}</h3>
+                        <p class="role"><em>${project.role}</em></p>
+                        <ul>
+                            ${project.details.map(detail => `<li>${detail}</li>`).join('')}
+                        </ul>
+                    </div>
+                `).join('')}
+            `;
+
+            // Render Education & Certifications
+            document.getElementById('education').innerHTML = `
+                <h2 class="section-title">Education</h2>
+                <div class="education-item">
+                    <h3>${data.education.degree}</h3>
+                    <p>${data.education.university} • ${data.education.year}</p>
+                </div>
+            `;
+
+            document.getElementById('certifications').innerHTML = `
+                <h2 class="section-title">Certifications</h2>
+                <div class="certifications-grid">
+                    ${data.certifications.map(cert => `<p>${cert}</p>`).join('')}
+                </div>
+            `;
+        }
+
+        // Initialize
+        loadResume();
+    </script>
+</body>
+</html>

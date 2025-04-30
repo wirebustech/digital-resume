@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oputa Uche Uzoukwu - Cloud & Systems Expert</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --dark: #1a1a1a;
+            --light: #ffffff;
+            --gray: #f5f5f5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background: var(--gray);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            padding: 3rem 0;
+            background: var(--primary);
+            color: var(--light);
+            margin-bottom: 2rem;
+            border-radius: 8px;
+        }
+
+        .contact-bar {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .contact-item a {
+            color: var(--light);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-item a:hover {
+            color: var(--secondary);
+        }
+
+        .section {
+            background: var(--light);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            color: var(--primary);
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-card {
+            padding: 1.5rem;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .skill-category {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .proficiency-dots {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .dot {
+            width: 15px;
+            height: 15px;
+            background: var(--secondary);
+            border-radius: 50%;
+            opacity: 0.3;
+        }
+
+        .dot.active {
+            opacity: 1;
+        }
+
+        .projects-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .project-card {
+            padding: 1.5rem;
+            border: 1px solid #eee;
+            border-radius: 8px;
+        }
+
+        .project-title {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .project-role {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .contact-bar {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header" id="header"></header>
+        <section class="section" id="skills"></section>
+        <section class="section" id="projects"></section>
+        <section class="section" id="education"></section>
+        <section class="section" id="certifications"></section>
+    </div>
+
+    <script>
+        const resumeData = {
+            personalInfo: {
+                name: "OPUTA UCHE UZOUKWU",
+                email: "oputauzoukwu@gmail.com",
+                phone: "+447946501063",
+                webpage: "https://oputauche.com",
+                linkedin: "https://linkedin.com/in/oputa-uche-uzoukwu"
+            },
+            skills: [
+                {
+                    category: "Cloud Infrastructure",
+                    items: ["AWS EC2/S3", "Azure VNets/NSGs", "Terraform", "Cloud Security", "Disaster Recovery", "Cost Optimization"],
+                    proficiency: 4
+                },
+                {
+                    category: "IT Desktop Support",
+                    items: ["Hardware Repair", "OS Installation", "Printer Setup", "Remote Support", "Active Directory", "Ticket Systems"],
+                    proficiency: 4
+                },
+                {
+                    category: "Microsoft 365",
+                    items: ["Exchange Online", "SharePoint", "Teams Admin", "OneDrive", "Licensing", "Security Center"],
+                    proficiency: 4
+                },
+                {
+                    category: "Windows Server",
+                    items: ["Active Directory", "Group Policy", "DNS/DHCP", "File Server", "Patch Management", "Backups"],
+                    proficiency: 4
+                },
+                {
+                    category: "Security & Compliance",
+                    items: ["IAM Policies", "DLP", "HIPAA", "GDPR", "Audits", "Encryption"],
+                    proficiency: 4
+                },
+                {
+                    category: "Soft Skills",
+                    items: ["Documentation", "Training", "Communication", "Problem Solving", "Team Leadership", "Project Planning"],
+                    proficiency: 4
+                }
+            ],
+            projects: [
+                {
+                    title: "Smart Energy Cloud System",
+                    role: "Cloud Architect",
+                    details: [
+                        "Designed AWS VPC architecture with public/private subnets",
+                        "Implemented S3 buckets for data storage",
+                        "Configured CloudWatch monitoring",
+                        "Set up IAM roles and policies",
+                        "Automated deployments with Terraform"
+                    ]
+                },
+                {
+                    title: "Hospital Management System (On-Prem)",
+                    role: "System Administrator",
+                    details: [
+                        "Deployed Windows Server 2019 infrastructure",
+                        "Managed Active Directory user groups",
+                        "Configured SQL Server database",
+                        "Implemented NTFS permissions",
+                        "Set up nightly backups"
+                    ]
+                },
+                {
+                    title: "Raspberry Pi Home Server Development",
+                    role: "Systems Specialist",
+                    details: [
+                        "Configured basic file sharing with Samba",
+                        "Set up local user accounts and permissions",
+                        "Implemented SSH for remote management",
+                        "Created backup scripts",
+                        "Performed system maintenance"
+                    ]
+                }
+            ],
+            education: {
+                degree: "B.Eng Electronics Engineering",
+                university: "University of Portsmouth, UK",
+                year: 2016
+            },
+            certifications: [
+                "AWS Certified Cloud Practitioner",
+                "Microsoft 365 Fundamentals",
+                "Azure Administrator Associate",
+                "CompTIA Security+"
+            ]
+        };
+
+        // Rendering Functions
+        function renderHeader() {
+            const header = document.getElementById('header');
+            header.innerHTML = `
+                <h1>${resumeData.personalInfo.name}</h1>
+                <div class="contact-bar">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:${resumeData.personalInfo.email}">${resumeData.personalInfo.email}</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>${resumeData.personalInfo.phone}</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-globe"></i>
+                        <a href="${resumeData.personalInfo.portfolio}" target="_blank">Portfolio</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-linkedin"></i>
+                        <a href="${resumeData.personalInfo.linkedin}" target="_blank">LinkedIn</a>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderSkills() {
+            const skillsSection = document.getElementById('skills');
+            skillsSection.innerHTML = `
+                <h2 class="section-title">Technical Proficiencies</h2>
+                <div class="skills-grid">
+                    ${resumeData.skills.map(skill => `
+                        <div class="skill-card">
+                            <h3 class="skill-category">${skill.category}</h3>
+                            <ul>
+                                ${skill.items.map(item => `<li>${item}</li>`).join('')}
+                            </ul>
+                            <div class="proficiency-dots">
+                                ${Array(5).fill().map((_, i) => `
+                                    <div class="dot ${i < skill.proficiency ? 'active' : ''}"></div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function renderProjects() {
+            const projectsSection = document.getElementById('projects');
+            projectsSection.innerHTML = `
+                <h2 class="section-title">Key Projects</h2>
+                <div class="projects-grid">
+                    ${resumeData.projects.map(project => `
+                        <div class="project-card">
+                            <h3 class="project-title">${project.title}</h3>
+                            <p class="project-role">${project.role}</p>
+                            <ul>
+                                ${project.details.map(detail => `<li>${detail}</li>`).join('')}
+                            </ul>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function renderEducation() {
+            document.getElementById('education').innerHTML = `
+                <h2 class="section-title">Education</h2>
+                <h3>${resumeData.education.degree}</h3>
+                <p>${resumeData.education.university} • ${resumeData.education.year}</p>
+            `;
+        }
+
+        function renderCertifications() {
+            document.getElementById('certifications').innerHTML = `
+                <h2 class="section-title">Certifications</h2>
+                <ul>
+                    ${resumeData.certifications.map(cert => `<li>${cert}</li>`).join('')}
+                </ul>
+            `;
+        }
+
+        // Initialize
+        window.onload = () => {
+            renderHeader();
+            renderSkills();
+            renderProjects();
+            renderEducation();
+            renderCertifications();
+        };
+    </script>
+</body>
+</html>
